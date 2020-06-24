@@ -15,16 +15,13 @@ router.use((req, res, next) => {
 // new list
 router.post('/new', async (req, res) => {
     try {
-        const board = await Board.findOne({ owner: req.session.user.id ,_id: req.body.boardId})
-        
+        const board = await Board.findOne({ userId: req.session.user.id ,_id: req.body.boardId})
+
         if(!board){
             res.status(400).send("Bad request");
         }else{
-            req.body.owner = board._id;
             const newList = await List.create(req.body);
-            board.lists.push(newList);
-            const result = await board.save();
-            res.status(200).send(result);
+            res.status(200).send(newList);
         }
         
     } catch{
@@ -33,26 +30,25 @@ router.post('/new', async (req, res) => {
 })
 
 //get all lists
-router.get('/boardLists/:boardId', async(req,res) =>{
+router.get('/allLists/:boardId', async(req,res) =>{
     try{
-        const boardLists = await Board.findById(req.params.boardId).populate('lists');
+        const boardLists = await List.find({boardId: req.params.boardId}).populate('boardId');
         console.log(boardLists);
         res.status(200).send(boardLists);
     }catch{
         res.status(400).send("Bad request");
-    }
-    
+    } 
 })
 
 //Update list name
-router.patch('/update', async(req,res) =>{
-    try{
-        const updatedList = await List.findOneAndUpdate({owner: req.body.boardId},req.body,{new:true})
-        res.status(200).send(updatedList);
-    }catch{
-        res.status(400).send("Bad request");
-    }
-})
+// router.patch('/update', async(req,res) =>{
+//     try{
+//         const updatedList = await List.findByIdAndUpdate({owner: req.body.boardId},req.body,{new:true})
+//         res.status(200).send(updatedList);
+//     }catch{
+//         res.status(400).send("Bad request");
+//     }
+// })
 
 //remove list
 

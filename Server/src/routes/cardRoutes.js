@@ -1,7 +1,7 @@
 const express = require("express");
 const Board = require('../models/Board')
 const List = require('../models/List');
-const Card = require('../models/Board')
+const Card = require('../models/Card')
 const router = express.Router();
 
 //middleware
@@ -17,27 +17,28 @@ router.use((req, res, next) => {
 router.post('/new', async (req, res) => {
     try {
         const list = await List.findById(req.body.listId);
-            console.log('list', list);
-        // const list = await Board.find({"lists._id": {$eq: req.body.listId}});
-        // console.log('list',list);
         
         if(!list){
             res.status(400).send("Bad request");
         }else{
-            console.log('after else')
-            req.body.owner = list._id;
-            console.log('req.body', req.body)
             const newCard = await Card.create(req.body);
-            console.log(newCard);
-            list.cards.push(newCard);
-            console.log(list.cards);
-            const result = await list.save();
-            res.status(200).send(result);
+            res.status(200).send(newCard);
         }
         
     } catch{
         res.status(400).send("Bad request");
     }
+})
+
+//get all cards
+router.get('/allCards/:listId', async(req,res) =>{
+    try{
+        const listCards = await Card.find({listId:req.params.listId}).populate('listId');
+        console.log(listCards);
+        res.status(200).send(listCards);
+    }catch{
+        res.status(400).send("Bad request");
+    } 
 })
 
 module.exports = router;

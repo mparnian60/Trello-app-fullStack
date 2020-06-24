@@ -15,7 +15,7 @@ router.use((req, res, next) => {
   //new board
   router.post('/new', async(req,res) =>{
       try{
-          req.body.owner = req.session.user.id;
+          req.body.userId = req.session.user.id;
         const newBoard = await Board.create(req.body);
         res.status(200).send(newBoard);
       }catch{
@@ -23,9 +23,20 @@ router.use((req, res, next) => {
       }
   })
 
+  //having two user for the same board
+  router.post('/new', async(req,res) =>{
+    try{
+        req.body.userId = req.session.user.id;
+      const newBoard = await Board.create(req.body);
+      res.status(200).send(newBoard);
+    }catch{
+      res.status(400).send("Bad request");
+    }
+})
+
   //get all Boards
 router.get('/boards', async(req,res) =>{
-  const boards = await Board.find({owner: req.session.user.id}).populate('lists');
+  const boards = await Board.find({userId: req.session.user.id});
   res.status(200).send(boards);
 })
 

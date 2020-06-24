@@ -5,13 +5,9 @@ const schema = new mongoose.Schema({
         type: String,
         required: true
     },
-    owner: {
-        type: String,
-        required: true
-    },
-    cards: [{
+    boardId: [{
         type: mongoose.Schema.ObjectId,
-        ref : 'Card'
+        ref : 'Board'
     }]
 })
 

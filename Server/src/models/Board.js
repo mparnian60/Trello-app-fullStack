@@ -5,13 +5,9 @@ const schema = new mongoose.Schema({
         type: String,
         required: true
     },
-    userId: {
-        type: String,
-        required: true
-    },
-    lists: [{
+    userId: [{
         type: mongoose.Schema.ObjectId,
-        ref : 'List'
+        ref : 'User'
     }]
 })
 
