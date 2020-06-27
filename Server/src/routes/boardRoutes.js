@@ -36,9 +36,16 @@ router.use((req, res, next) => {
 
   //get all Boards
 router.get('/boards', async(req,res) =>{
-  const boards = await Board.find({userId: req.session.user.id});
-  res.status(200).send(boards);
+  const allBoards = await Board.find({userId: req.session.user.id});
+  res.status(200).send(allBoards);
 })
+
+//get boardDetails by ID
+router.get('/boardDetails/:id', async(req,res) =>{
+  const boardDetails = await Board.findById(req.params.id);
+  res.status(200).send(boardDetails);
+})
+
 
 
 module.exports = router;

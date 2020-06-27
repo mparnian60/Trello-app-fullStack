@@ -7,9 +7,15 @@ const router = express.Router();
 //new user
 router.post('/new', async (req, res) => {
     try {
-        req.body.password = await bcrypt.hash(req.body.password, 10);
-        const data = await User.create(req.body)
-        res.send(data)
+        const username = await User.find({username: req.body.username});
+        if(!username){
+            req.body.password = await bcrypt.hash(req.body.password, 10);
+            const data = await User.create(req.body)
+            res.send(data)
+        }else{
+            res.status(409).send('username already exist');
+        }
+        
     } catch{
         res.status(400).send('Bad request');
     }
