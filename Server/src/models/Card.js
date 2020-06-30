@@ -5,10 +5,10 @@ const schema = new mongoose.Schema({
         type: String,
         required: true
     },
-    listId: [{
+    listId: {
         type: mongoose.Schema.ObjectId,
         ref : 'List'
-    }]
+    }
 })
 
 module.exports = mongoose.model('Card', schema);

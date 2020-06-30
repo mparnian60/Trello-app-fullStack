@@ -1,20 +1,18 @@
-let data;
-
-const newBoardAPI = async (boardData) => {
+const newListAPI = async (listData) => {
 
     try{
 
-        const response = await fetch('/api/board/new', {
+        const response = await fetch('/api/list/new', {
             method: 'POST',
             mode: 'cors',
             credentials: 'same-origin',
             headers: {
                 'Content-Type': 'application/json'                
               },
-            body: JSON.stringify(boardData)
+            body: JSON.stringify(listData)
         });
 
-        data = await response.json();
+        const data = await response.json();
         console.log(data);
 
     } catch(e) {
@@ -23,4 +21,4 @@ const newBoardAPI = async (boardData) => {
 
 };
 
-export {newBoardAPI, data};
+export default newListAPI;

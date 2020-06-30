@@ -1,16 +1,19 @@
 import getAllBoards from '../api/Trello/allBoardsAPI.js';
+import newBoard from './newBoard.js';
 
 const drawallBordsToDom = async (boards) =>{
 
     const boardList = await getAllBoards();
-    
+
     let eachBoard = "";
 
     boardList.forEach((board) => {
         eachBoard = eachBoard + `<button type="button" class="btn btn-outline-secondary eachBoard" id=${board._id}>${board.name}</button>`
     });  
 
-    $('#app').append(eachBoard);
+    $('#boardDetails').empty();
+    $('#boardDetails').append(eachBoard);
+
 
     redirectToBoardSheet();
 }

@@ -41,4 +41,15 @@ router.get('/allCards/:listId', async(req,res) =>{
     } 
 })
 
+//update card position in drage & drop
+router.patch('/updateIdDragDrop/:id', async(req,res) =>{
+    try{
+        const card = await Card.findByIdAndUpdate({_id:req.params.id}, {listId: req.body.listId}, {new:true});
+        console.log(card);
+        res.status(200).send(card);
+    }catch{
+        res.status(400).send("Bad request");
+    } 
+})
+
 module.exports = router;

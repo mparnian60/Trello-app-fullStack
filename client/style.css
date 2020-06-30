@@ -104,3 +104,46 @@ body{
 .container {
     margin-left: 0;
 }
+
+#login{
+    width: 300px;
+    height: 400px;
+    background-color: #cabdf3;
+    float: right;
+    margin: 70px 70px;
+    border-radius: 3%;
+}
+
+#loginHeader{
+    padding: 20px;
+    text-align: center;
+}
+
+#form-login{
+    margin: auto 20px;
+    text-align: center;
+}
+
+#loginFooter{
+    text-align: center;
+    margin: 25px;
+}
+
+#createNewBoard{
+    width: 200px;
+    height: 100px;
+    margin: 50px;
+    background-color: #cabdf3;
+}
+
+.eachBoard{
+    width: 200px;
+    height: 100px;
+    margin: 30px;
+    background-color: #cabdf3;
+}
+
+.table{
+    width: 50%;
+    display: flex;
+}

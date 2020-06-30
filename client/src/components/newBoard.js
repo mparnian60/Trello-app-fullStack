@@ -1,4 +1,5 @@
-import newBoardAPI from '../api/Trello/newBordAPI.js'
+import {newBoardAPI, data} from '../api/Trello/newBordAPI.js'
+
 
 const newBoard = (ctx, next) => {
  /*template*/
@@ -10,7 +11,7 @@ const newBoard = (ctx, next) => {
     `);
 
 
-    $(document).on('click','#createNewBoard',(e) => {
+    $(document).on('click','#createNewBoard',async (e) => {
         e.preventDefault();
 
         console.log('new board clicked');
@@ -23,9 +24,10 @@ const newBoard = (ctx, next) => {
             name: boardNameNew
         };
 
-        console.log(boardData);
-        newBoardAPI(boardData);
-        page.redirect("/boardDetails");
+        
+        await newBoardAPI(boardData);
+        // console.log('id',data._id);
+        page.redirect(`/boardDetails/${data._id}`);
     });
 
 }

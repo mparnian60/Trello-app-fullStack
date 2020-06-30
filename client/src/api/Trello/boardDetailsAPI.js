@@ -34,7 +34,26 @@ const getListDetails = async(boardId) =>{
     }   
 }
 
+const getCardDetails = async(listId) =>{
+
+    try{
+
+        const response = await fetch(`/api/card/allcards/${listId}`,{
+            method: 'GET',
+            mode: 'cors',
+            credentials: 'same-origin'
+        });
+
+        const data = await response.json();
+        return data;
+
+    }catch(e){
+        console.log(e);
+    }   
+}
+
 export default {
     getBoardDetails, //shortcut for getBoardDetails : getBoardDetails when key pair value are the same
-    getListDetails
+    getListDetails,
+    getCardDetails
 }

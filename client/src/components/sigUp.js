@@ -4,7 +4,8 @@ const signup = (ctx, next) => {
     /*template*/
     $('#app').empty();
        $('#app').append(`
-        <div>
+       <div id='login'>
+        <div id='loginHeader'>
             <h1>Sign Up</h1>
         </div>
         <div>
@@ -19,10 +20,11 @@ const signup = (ctx, next) => {
                     <input type="password" class="form-control" 
                             id="password" name="password" placeholder="password...">
                 </div>
-                <button type="submit" class="btn btn-primary">Submit</button>
+                <button type="submit" class="btn btn-secondary">Sign Up</button>
             </form>
         </div>
-       `);
+    </div>
+    `);
    
    
        $("#form-login").submit( async (e) => {

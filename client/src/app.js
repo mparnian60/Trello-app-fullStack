@@ -11,6 +11,8 @@ import newBoard from './components/newBoard.js';
 import drawallBordsToDom from './components/allBoards.js';
 import boardDetails from './components/boardDetails.js';
 import drawBoardDetailsToDom from './components/boardDetails.js';
+import newList from './components/newList.js';
+import homeDesign from './components/homeDesign.js'
 
 
 const showPage = () =>{
@@ -20,9 +22,7 @@ const showPage = () =>{
        page.redirect('/home');
     });
 
-    page('/home',nav, () => {
-        $('#user').append('<h1>Home</h1>');
-    });
+    page('/home',nav,homeDesign);
 
     page('/boards',nav,()=>{
         newBoard();
