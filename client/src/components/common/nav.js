@@ -1,4 +1,22 @@
+import logoutAPI from '../../api/user/logoutAPI.js'
+
 const nav = (ctx, next) => {
+
+    const userDetails = JSON.parse(window.localStorage.getItem("User-Data"));
+    let logout = "";
+    let userLogin = ""
+
+    if(userDetails){
+        logout = `
+        <div>
+            <button class="btn btn-outline my-2 my-sm-0" id='logout'>
+                Log Out
+            </button>
+        </div>
+        `
+        userLogin = `<div id='userLogIn'>${userDetails.username}</div>`
+    }
+
     /*template*/
     $('#nav').empty();
     $("#nav").append(`
@@ -16,15 +34,32 @@ const nav = (ctx, next) => {
             </div>
         </div>
         <div>
-            <form class="form-inline my-2 my-lg-0">
-                <button class="btn btn-outline my-2 my-sm-0" id='logout' type="submit">
-                    <a href="/login">Log Out</a>
+                <button class="btn btn-outline my-2 my-sm-0" id='signup'>
+                    <a href="/signup">Sign Up</a>
                 </button>
-            </form>
         </div>
+        <div>
+                <button class="btn btn-outline my-2 my-sm-0" id='logIn'>
+                    <a href="/login">Log In</a>
+                </button>
+        </div>
+
+        ${logout}
+        
+        ${userLogin}
     
     </nav>
     `)
+
+    $('#logout').on('click',()=>{
+        logoutAPI();
+
+        window.localStorage.removeItem('User-Data');
+
+        $('#boardDetails').children().remove();
+        alert('Log out successfuly');
+        page.redirect('/home');
+    })
 
     next();
 }

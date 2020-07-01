@@ -4,8 +4,11 @@ import login from './logIn.js'
 
 const homeDesign = () =>{
 
-    $('#app').empty();
-    // $('#app').append("<img src='../../../images/goodquality.jpg'/>")
+    $('#boardDetails').children().remove();
+    
+    $('body').css({
+        'background-image': 'url("./images/goodquality.jpg")'
+    })
     login();
 
 

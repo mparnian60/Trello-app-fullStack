@@ -1,8 +1,11 @@
 import logInAPI from '../api/user/logInAPI.js'
 
+
 const login = (ctx, next) => {
-    /*template*/
+
+    $('#boardDetails').children().remove();
     $('#app').empty();
+    /*template*/
     $('#app').append(`
     <div id='login'>
         <div id='loginHeader'>
@@ -39,8 +42,15 @@ const login = (ctx, next) => {
         };
 
         console.log(userData);
-        logInAPI(userData);
+        const userLoginData = await logInAPI(userData);
+        console.log('userdata', userLoginData);
+    
+        //store User data into local storage
+        const JSONstring = JSON.stringify(userLoginData);
+        window.localStorage.setItem('User-Data', JSONstring);
+        
         page.redirect('/boards');
+        // $('#boardDetails').empty();
     });
 
 }

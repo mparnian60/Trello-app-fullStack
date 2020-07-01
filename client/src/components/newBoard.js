@@ -18,7 +18,7 @@ const newBoard = (ctx, next) => {
 
         const boardNameNew = prompt('Add board Name');
 
-        console.log(boardNameNew);
+        // console.log(boardNameNew);
 
         const boardData = {
             name: boardNameNew

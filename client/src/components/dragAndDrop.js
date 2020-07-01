@@ -19,7 +19,8 @@ function dragAndDrop(){
 
         $(`#list${listId}`).prepend(ui.draggable);
         
-       await updateCardDragDropAPI(cardId,listId);
+        const dragDropCard = await updateCardDragDropAPI(cardId,listId);
+        console.log(dragDropCard);
   
       }
     });

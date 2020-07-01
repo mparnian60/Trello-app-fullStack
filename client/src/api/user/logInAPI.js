@@ -1,3 +1,5 @@
+let data;
+
 const logInAPI = async (userData) => {
 
     try{
@@ -12,8 +14,10 @@ const logInAPI = async (userData) => {
             body: JSON.stringify(userData)
         });
 
-        const data = await response.json();
+        data = await response.json();
         console.log(data);
+
+        return data;
 
     } catch(e) {
         console.log(e);

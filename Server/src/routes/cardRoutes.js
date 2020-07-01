@@ -34,7 +34,7 @@ router.post('/new', async (req, res) => {
 router.get('/allCards/:listId', async(req,res) =>{
     try{
         const listCards = await Card.find({listId:req.params.listId}).populate('listId');
-        console.log(listCards);
+        // console.log(listCards);
         res.status(200).send(listCards);
     }catch{
         res.status(400).send("Bad request");
@@ -45,10 +45,21 @@ router.get('/allCards/:listId', async(req,res) =>{
 router.patch('/updateIdDragDrop/:id', async(req,res) =>{
     try{
         const card = await Card.findByIdAndUpdate({_id:req.params.id}, {listId: req.body.listId}, {new:true});
-        console.log(card);
+        // console.log(card);
         res.status(200).send(card);
     }catch{
         res.status(400).send("Bad request");
+    } 
+})
+
+//Delete a card
+router.delete('/delete/:id', async(req,res) =>{
+    try{
+        const card = await Card.findByIdAndDelete(req.params.id);
+        // console.log(card);
+        res.status(200).send(card);
+    }catch{
+        res.status(400).send('bad request');
     } 
 })
 

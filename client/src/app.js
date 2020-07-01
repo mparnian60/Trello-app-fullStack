@@ -9,10 +9,9 @@ import signUp from './components/sigUp.js';
 import login from './components/logIn.js';
 import newBoard from './components/newBoard.js';
 import drawallBordsToDom from './components/allBoards.js';
-import boardDetails from './components/boardDetails.js';
 import drawBoardDetailsToDom from './components/boardDetails.js';
-import newList from './components/newList.js';
 import homeDesign from './components/homeDesign.js'
+
 
 
 const showPage = () =>{

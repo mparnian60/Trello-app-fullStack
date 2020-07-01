@@ -2,6 +2,7 @@ import boardDetails from '../api/Trello/boardDetailsAPI.js';
 import newListAPI from '../api/Trello/newListAPI.js';
 import newCardAPI from '../api/Trello/newCardAPI.js';
 import dragAndDrop from '../components/dragAndDrop.js';
+import deleteCardAPI from '../api/Trello/deleteCardAPI.js'
 
 
 let boardId = "";
@@ -11,7 +12,9 @@ const printCard = (cardDetails) => {
     // console.log('card details up', cardDetails);
     return `
     <div class='ui-widget-content draggable' data-cardid=${cardDetails._id} data-listid=${cardDetails.listId._id}>
-    <li class="list-group-item">${cardDetails.name}</li>
+        <li class="list-group-item"><input class="cardInput" data-cardid=${cardDetails._id} value=${cardDetails.name}></input>
+        <button class="btn btn-outline-danger addItem" type="button" id="button-editCard" data-column=${cardDetails._id}>delete</button>
+        </li>
     </div>
     `
 }
@@ -42,7 +45,7 @@ const printList = async (listDetails) => {
 
 
     return `
-       <div class="col-sm table droppable" data-column=${listDetails._id}>
+       <div class="droppable" data-column=${listDetails._id}>
           <div class='dropZone'>
               <div class="card">
                   <div class="card-header">
@@ -125,7 +128,7 @@ const drawBoardDetailsToDom = async (ctx, next) => {
 
     `);
 
-       dragAndDrop();
+    dragAndDrop();
 }
 
 //Add new list
@@ -139,7 +142,7 @@ $(document).on('click', '#button-addon', async (e) => {
 
     console.log(listData);
     await newListAPI(listData);
-    page.redirect(`/boardDetails/${ boardId }`)
+    page.redirect(`/boardDetails/${boardId}`)
 
 });
 
@@ -148,14 +151,26 @@ $(document).on('click', '#button-addonCard', async (e) => {
     e.preventDefault();
 
     const cardData = {
-        name: $(`#dataEntry${ e.target.dataset.column }`).val(),
+        name: $(`#dataEntry${e.target.dataset.column}`).val(),
         listId: e.target.dataset.column
     };
 
     console.log(cardData);
     await newCardAPI(cardData);
-    page.redirect(`/boardDetails/${ boardId }`)
+    page.redirect(`/boardDetails/${boardId}`)
 
+});
+
+//delete cards
+
+$(document).on('click', '#button-editCard', async (e) => {
+    console.log(e);
+    e.preventDefault();
+    console.log(e.target.dataset.column);
+    
+    await deleteCardAPI(e.target.dataset.column);
+
+    $(`[data-cardid=${e.target.dataset.column}]`).remove();
 });
 
 

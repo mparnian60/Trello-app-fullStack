@@ -1,8 +1,10 @@
 import signUpAPI from '../api/user/signUpAPI.js';
 
 const signup = (ctx, next) => {
-    /*template*/
+
+    $('#boardDetails').children().remove();
     $('#app').empty();
+    /*template*/
        $('#app').append(`
        <div id='login'>
         <div id='loginHeader'>
@@ -39,7 +41,7 @@ const signup = (ctx, next) => {
            await signUpAPI(userData).catch((e)=>{
             console.log("error",e);
            });
-           page.redirect('/boards');
+           page.redirect('/home');
        });
    
    }

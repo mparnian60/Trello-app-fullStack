@@ -1,5 +1,6 @@
 import getAllBoards from '../api/Trello/allBoardsAPI.js';
-import newBoard from './newBoard.js';
+import newBoardBtn from './newBoard.js';
+
 
 const drawallBordsToDom = async (boards) =>{
 
@@ -11,18 +12,14 @@ const drawallBordsToDom = async (boards) =>{
         eachBoard = eachBoard + `<button type="button" class="btn btn-outline-secondary eachBoard" id=${board._id}>${board.name}</button>`
     });  
 
-    $('#boardDetails').empty();
-    $('#boardDetails').append(eachBoard);
+    $('#app').children().remove();
+    $('#app').append(eachBoard);
 
+    $('.eachBoard').on('click',(e)=>{
+        page.redirect(`/boardDetails/${e.target.id}`)
+    })
 
-    redirectToBoardSheet();
 }
 
-const redirectToBoardSheet = (board) =>{
-    $(document).on('click','.eachBoard',(e)=>{
-        e.preventDefault();
-        page.redirect(`/boardDetails/${e.target.id}`);
-    })
-}  
 
 export default drawallBordsToDom;
