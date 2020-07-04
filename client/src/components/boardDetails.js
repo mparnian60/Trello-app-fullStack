@@ -2,7 +2,8 @@ import boardDetails from '../api/Trello/boardDetailsAPI.js';
 import newListAPI from '../api/Trello/newListAPI.js';
 import newCardAPI from '../api/Trello/newCardAPI.js';
 import dragAndDrop from '../components/dragAndDrop.js';
-import deleteCardAPI from '../api/Trello/deleteCardAPI.js'
+import deleteCardAPI from '../api/Trello/deleteCardAPI.js';
+import updateCardDescriptionAPI from '../api/Trello/updateCardDescriptionAPI.js';
 
 
 let boardId = "";
@@ -67,19 +68,34 @@ const printList = async (listDetails) => {
 }
 
 const drawListDetailsToDom = async (boardId) => {
-    const listDetails = await boardDetails.getListDetails(boardId);
+    let listDetails = await boardDetails.getListDetails(boardId);
+
+    console.log(listDetails);
+
+    //sort name of lits alphabetically
+    listDetails = listDetails.sort((a,b)=>{
+        if(a.name < b.name){
+            return -1;
+        }
+        if(a.name > b.name){
+            return 1;
+        }
+
+        return 0;
+
+    })
     // console.log('list details 2', listDetails);
 
     let listDetailsInToDom = ""
 
     if (listDetails) {
-        //promise.all means finish all previous promises before printList loop
-        await Promise.all(listDetails.map(async (list) => {
-            const eachList = await printList(list)
-            // console.log('eachlist', eachList)
-            listDetailsInToDom = listDetailsInToDom + eachList;
 
-        }))
+        //add lists to Dom
+
+        for (let i=0; i<listDetails.length; i++){
+            const eachList = await printList(listDetails[i])
+            listDetailsInToDom = listDetailsInToDom + eachList;
+        }
     }
 
     // console.log('listDetailsInToDom', listDetailsInToDom)
@@ -164,14 +180,34 @@ $(document).on('click', '#button-addonCard', async (e) => {
 //delete cards
 
 $(document).on('click', '#button-editCard', async (e) => {
-    console.log(e);
+    // console.log(e);
     e.preventDefault();
-    console.log(e.target.dataset.column);
+    // console.log(e.target.dataset.column);
     
     await deleteCardAPI(e.target.dataset.column);
 
     $(`[data-cardid=${e.target.dataset.column}]`).remove();
 });
+
+//Update card description
+
+// $(document).on('click', '.cardInput', async (e) => {
+
+//     e.preventDefault();
+
+//     const cardId = e.target.dataset.cardid;
+//     console.log(cardId);
+
+//     $('.cardInput').blur(async(e)=>{
+//         const newDescription = e.target.value;
+//         // console.log(newDescription);
+
+//         await updateCardDescriptionAPI(cardId,newDescription);
+
+//     });
+   
+// });
+
 
 
 export default drawBoardDetailsToDom;

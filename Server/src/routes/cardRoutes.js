@@ -63,4 +63,15 @@ router.delete('/delete/:id', async(req,res) =>{
     } 
 })
 
+//update card Name
+router.patch('/updateCardDescription/:id', async(req,res) =>{
+    try{
+        const card = await Card.findByIdAndUpdate({_id:req.params.id}, {name: req.body.name}, {new:true});
+        // console.log(card);
+        res.status(200).send(card);
+    }catch{
+        res.status(400).send("Bad request");
+    } 
+})
+
 module.exports = router;

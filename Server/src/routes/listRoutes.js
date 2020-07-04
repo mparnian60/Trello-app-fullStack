@@ -40,16 +40,15 @@ router.get('/allLists/:boardId', async(req,res) =>{
     } 
 })
 
-//Update list name
-// router.patch('/update', async(req,res) =>{
-//     try{
-//         const updatedList = await List.findByIdAndUpdate({owner: req.body.boardId},req.body,{new:true})
-//         res.status(200).send(updatedList);
-//     }catch{
-//         res.status(400).send("Bad request");
-//     }
-// })
-
-//remove list
+//Delete all lists related to a board
+router.delete('/delete/:boardId', async(req,res) =>{
+    try{
+        const list = await List.deleteMany({"boardId": req.params.id});
+        console.log(list);
+        res.status(200).send(list);
+    }catch{
+        res.status(400).send('bad request');
+    } 
+})
 
 module.exports = router;

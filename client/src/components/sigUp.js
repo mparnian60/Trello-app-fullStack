@@ -38,10 +38,18 @@ const signup = (ctx, next) => {
            };
    
            console.log(userData);
-           await signUpAPI(userData).catch((e)=>{
-            console.log("error",e);
-           });
-           page.redirect('/home');
+           const userSignUpData = await signUpAPI(userData);
+           console.log('userdata', userSignUpData);
+
+           if(userSignUpData){
+            page.redirect('/home');
+           }else{
+            // console.log('userdata', userSignUpData.status());
+               alert('username already exists');
+               
+           }
+
+           
        });
    
    }

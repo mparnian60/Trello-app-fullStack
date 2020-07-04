@@ -7,8 +7,7 @@ page.configure({window:window});// bind to main window
 import nav from './components/common/nav.js';
 import signUp from './components/sigUp.js';
 import login from './components/logIn.js';
-import newBoard from './components/newBoard.js';
-import drawallBordsToDom from './components/allBoards.js';
+import {newBoard, drawallBordsToDom, boardList} from './components/allBoards.js';
 import drawBoardDetailsToDom from './components/boardDetails.js';
 import homeDesign from './components/homeDesign.js'
 
@@ -28,11 +27,14 @@ const showPage = () =>{
         drawallBordsToDom();
     });
 
+    page('/boardList',nav,boardList);
+
     page('/boardDetails/:id',nav,drawBoardDetailsToDom);
 
     page('/login',nav,login);
 
     page('/signup',nav,signUp);
+
 
     page({hashbang: true});
 

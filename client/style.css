@@ -8,6 +8,7 @@
 
 .droppable{
     margin: 20px 20px 20px 20px;
+    min-width: 270px;
 }
 
 .dropZone{ 
@@ -21,7 +22,21 @@
     border: 1px solid #8f77dc;
     padding: 0;
     height: 50px;
-    
+}
+
+#nav{
+    position: fixed;
+    width: 100vw
+}
+
+#app{
+    position: absolute;
+    margin-top: 100px;
+}
+
+#boardDetails{
+    position: absolute;
+    margin-top: 150px; 
 }
 
 .navbar-light .navbar-brand {
@@ -138,8 +153,9 @@ body{
 #createNewBoard{
     width: 200px;
     height: 100px;
-    margin: 50px;
-    background-color: #cabdf3;
+    margin: 30px;
+    background-color: #6b58aa;
+    font-size: 20px;
 }
 
 .eachBoard{
@@ -158,8 +174,11 @@ body{
     border: 1px solid white;
     width: 100px;
     height: 40px;
-   margin: 4px 20px 4px;
-    border-radius: 20%;
+    margin: 4px 20px 4px;
+    border-radius: 10%;
+    text-align: center;
+    color: white;
+    padding-top: 7px;
 }
 
 .cardInput{
@@ -177,4 +196,58 @@ body{
 
 #boardDetails{
     display: inline-flex;
+}
+
+#boardNameDiv{
+    display: contents;
+}
+
+.boardList{
+    width: 530px;
+    background-color: #cabdf3;
+    border-color: transparent;
+
+}
+
+#boardListAll{
+    width: 600px;
+    background-color: #cabdf3;
+    margin-left: 50px;
+}
+
+#deleteBoard{
+    width:50px;
+    margin: 5px;
+    margin-top: -50px;
+}
+
+.card-body{
+    padding: 0;
+}
+
+#boardListHeader{
+    width: 600px;
+    background-color: #524a6b;
+    border-color: #524a6b;
+    margin-top: 50px;
+    margin-left: 50px;
+}
+
+.button-deleteBoard{
+    float: right;
+    width: 50px;
+    height: 50px;
+    font-size: 13px;
+    padding: 0;
+    font-weight: 500;
+}
+
+.list1{
+    width: 600px;
+    float: left;
+}
+
+.list2{
+    width: 100px;
+    float: left;
 }

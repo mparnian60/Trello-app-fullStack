@@ -1,15 +1,18 @@
-const signUpAPI = async (userData) => {
+const updateCardDescriptionAPI = async (cardId, newName) => {
 
     try{
 
-        const response = await fetch('/api/user/new', {
-            method: 'POST',
+        const response = await fetch(`/api/card/updateCardDescription/${cardId}`, {
+            method: 'PATCH',
             mode: 'cors',
             credentials: 'same-origin',
             headers: {
                 'Content-Type': 'application/json'                
               },
-            body: JSON.stringify(userData)
+            body: JSON.stringify({
+                name : newName
+            }),
+            
         });
 
         const data = await response.json();
@@ -23,4 +26,4 @@ const signUpAPI = async (userData) => {
 
 };
 
-export default signUpAPI;
+export default updateCardDescriptionAPI;

@@ -21,6 +21,8 @@ const newBoardAPI = async (boardData) => {
         console.log(e);
     }
 
+    return data;
+
 };
 
-export {newBoardAPI, data};
+export default newBoardAPI;

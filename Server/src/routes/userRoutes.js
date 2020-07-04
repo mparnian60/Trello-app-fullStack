@@ -7,7 +7,8 @@ const router = express.Router();
 //new user
 router.post('/new', async (req, res) => {
     try {
-        const username = await User.find({username: req.body.username});
+        const username = await User.findOne({username: req.body.username});
+
         if(!username){
             req.body.password = await bcrypt.hash(req.body.password, 10);
             const data = await User.create(req.body)

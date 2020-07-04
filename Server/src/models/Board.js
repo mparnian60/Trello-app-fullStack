@@ -5,10 +5,10 @@ const schema = new mongoose.Schema({
         type: String,
         required: true
     },
-    userId: [{
+    userId: {
         type: mongoose.Schema.ObjectId,
         ref : 'User'
-    }]
+    }
 })
 
 module.exports = mongoose.model('Board', schema);

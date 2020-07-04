@@ -5,10 +5,10 @@ const schema = new mongoose.Schema({
         type: String,
         required: true
     },
-    boardId: [{
+    boardId: {
         type: mongoose.Schema.ObjectId,
         ref : 'Board'
-    }]
+    }
 })
 
 module.exports = mongoose.model('List', schema);
