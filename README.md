@@ -21,7 +21,7 @@ Implementation Period: 2 Weeks
 * Single Page Application Bias - Throughout some of the earlier days i had kept thinking of this project as a single page app and did not put enough consideration to the routing and ways that each page will link which could have improved my workflow.
 * Wireframing to development - After wireframing my idea i had not realised how complex some of the associations and tasks were going to be, and due to this i feel that i did not achieve all my goals.
 * JQUERY Framework Conflicts - due to the use of Bootstrap, the lists were not displaying correctly, then i had to use flex rather than Bootstrap to dispaly my lists.
-* Lack of knowledge about dynamic DOM - I did not have enough understanding of manipolating DOM dynamically and therefore i had some issue activationg my buttons with document.on.
+* Had some issue with accessing DOM elements, when it was created dynamically- I learned to use documnet.on rather than (#id).on to be able to activate my buttons which solved my problem. 
 ## FURTHER IMPROVEMENTS
 * Implement edit on Boards, lists and cards
 * Deactive buttons if incorrect data type entered
